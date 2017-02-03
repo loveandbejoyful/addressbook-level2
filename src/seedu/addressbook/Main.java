@@ -12,6 +12,7 @@ import seedu.addressbook.ui.TextUi;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.io.FileNotFoundException;
 
 
 /**
@@ -75,11 +76,25 @@ public class Main {
         ui.showGoodbyeMessage();
         System.exit(0);
     }
+    
+    /**
+     * Throws exception if user deletes storage file. 
+     */
+    private void checkIfStorageFileDeleted() throws FileNotFoundException {
+    	if (!storage.path.toFile().exists()) { // check if storage file exists
+    		throw new FileNotFoundException("User deleted storage file");
+    	}
+    }
 
     /** Reads the user command and executes it, until the user issues the exit command.  */
     private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
+        	try {
+        		checkIfStorageFileDeleted();
+        	} catch (FileNotFoundException fnfe) {
+        		fnfe.printStackTrace();
+        	}
             String userCommandText = ui.getUserCommand();
             command = new Parser().parseCommand(userCommandText);
             CommandResult result = executeCommand(command);
