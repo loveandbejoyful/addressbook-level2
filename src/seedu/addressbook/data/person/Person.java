@@ -10,7 +10,10 @@ import java.util.Objects;
  */
 public class Person implements ReadOnlyPerson {
 
-    private Name name;
+	private static int nextSequenceNumber = 1;
+	
+	private int sequenceNumber;
+	private Name name;
     private Phone phone;
     private Email email;
     private Address address;
@@ -25,13 +28,26 @@ public class Person implements ReadOnlyPerson {
         this.email = email;
         this.address = address;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.sequenceNumber = nextSequenceNumber;
+        incrementSeqNo();
     }
 
     /**
      * Copy constructor.
      */
     public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getName(), source.getPhone(), source.getEmail(), 
+        		source.getAddress(), source.getTags());
+        this.sequenceNumber = nextSequenceNumber;
+        incrementSeqNo();
+    }
+    
+    private static void incrementSeqNo() {
+    	nextSequenceNumber++;
+    }
+    
+    public int getSeqNo() {
+    	return sequenceNumber;
     }
 
     @Override

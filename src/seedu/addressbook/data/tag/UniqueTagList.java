@@ -146,6 +146,13 @@ public class UniqueTagList implements Iterable<Tag> {
     public void clear() {
         internalList.clear();
     }
+    
+    /**
+     * Checks if list is empty.
+     */
+    public boolean isEmpty() {
+    	return internalList.isEmpty();
+    }
 
     /**
      * Replaces the Tags in this list with those in the argument tag list.
