@@ -47,6 +47,11 @@ public class Name implements Printable {
     public String toString() {
         return fullName;
     }
+    
+    @Override
+    public String getPrintableString() {
+    	return "Name: " + toString();
+    }
 
     @Override
     public boolean equals(Object other) {

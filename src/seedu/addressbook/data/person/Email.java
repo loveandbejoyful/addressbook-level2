@@ -41,6 +41,11 @@ public class Email implements Printable {
     public String toString() {
         return value;
     }
+    
+    @Override
+    public String getPrintableString() {
+    	return "Email: " + toString();
+    }
 
     @Override
     public boolean equals(Object other) {

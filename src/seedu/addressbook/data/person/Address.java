@@ -40,6 +40,11 @@ public class Address implements Printable {
     public String toString() {
         return value;
     }
+    
+    @Override
+    public String getPrintableString() {
+    	return "Address: " + toString();
+    }
 
     @Override
     public boolean equals(Object other) {

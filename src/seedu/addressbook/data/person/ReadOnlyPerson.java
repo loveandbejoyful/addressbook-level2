@@ -83,4 +83,16 @@ public interface ReadOnlyPerson {
         }
         return builder.toString();
     }
+    
+    /**
+     * Returns a concatenated version of the printable strings of each object.
+     */
+    default String getPrintableString(Printable... printables) {
+    	String printableString = "";
+    	for (Printable p : printables) {
+    		printableString += " " + p.getPrintableString();
+        }
+    	return printableString;
+    }
+
 }

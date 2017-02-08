@@ -40,6 +40,11 @@ public class Phone implements Printable {
     public String toString() {
         return value;
     }
+    
+    @Override
+    public String getPrintableString() {
+    	return "Phone: " + toString();
+    }
 
     @Override
     public boolean equals(Object other) {
