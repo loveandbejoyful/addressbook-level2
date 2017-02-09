@@ -2,6 +2,7 @@ package seedu.addressbook.data.person;
 
 import seedu.addressbook.data.exception.IllegalValueException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,6 +42,38 @@ public class Name {
      */
     public List<String> getWordsInName() {
         return Arrays.asList(fullName.split("\\s+"));
+    }
+    
+    /**
+     * Returns true if the other name is very similar to this name.
+     * Two names are considered similar if at least one of them contains all the words of the other name.
+     * E.g. "John K Smith" and "John Smith" are similar because the words in "John K Smith" include the words in "John Smith".
+     * This comparison is not case-sensitive.   
+     */
+    public boolean isSimilar(Name other) {
+    	if (other == null) {
+    		return false;
+    	}
+    	String[] thisNameWordsArray = this.fullName.toLowerCase().split(" ");
+    	String[] otherNameWordsArray = other.fullName.toLowerCase().split(" ");
+    	ArrayList<String> thisNameWordsList = new ArrayList<String>(Arrays.asList(thisNameWordsArray));
+    	ArrayList<String> otherNameWordsList = new ArrayList<String>(Arrays.asList(otherNameWordsArray));
+    	boolean thisNameContainsOtherNameWords = true;
+    	boolean otherNameContainsThisNameWords = true;
+    	
+    	for (String str : thisNameWordsList) {
+    		if (!otherNameWordsList.contains(str)) {
+    			otherNameContainsThisNameWords = false;
+    			break;
+    		}
+    	}
+    	for (String str : otherNameWordsList) {
+    		if (!thisNameWordsList.contains(str)) {
+    			thisNameContainsOtherNameWords = false;
+    			break;
+    		}
+    	}
+    	return thisNameContainsOtherNameWords || otherNameContainsThisNameWords;
     }
 
     @Override
