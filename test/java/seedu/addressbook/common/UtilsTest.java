@@ -11,6 +11,11 @@ import org.junit.Test;
 public class UtilsTest {
     @Test
     public void isAnyNull() {
+    	// list with only null objects
+    	assertTrue(Utils.isAnyNull((Object) null));
+    	assertTrue(Utils.isAnyNull(null, null, null));
+    	assertTrue(Utils.isAnyNull(null, (Object) null));
+    	
         // empty list
         assertFalse(Utils.isAnyNull());
 
